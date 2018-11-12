@@ -1,0 +1,50 @@
+spring:
+    #数据源配置
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://111.230.157.165:3306/springboot?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: 951207
+        initialSize: 10
+        maxActive: 100
+        minIdle: 10
+        maxWait: 60000
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        stat-view-servlet:
+            enabled: true
+            url-pattern: /druid/*
+            #login-username: admin
+            #login-password: admin
+        filter:
+            stat:
+                log-slow-sql: true
+                slow-sql-millis: 1000
+                merge-sql: true
+            wall:
+                config:
+                    multi-statement-allow: true
+    #redis配置
+    redis:
+        database: 0
+        host: 111.230.157.165
+        port: 6379
+        password: 951207
+        timeout: 100000
+        pool:
+          max-active: 1024
+          max-idle: 200
+          min-idle: 50
+          max-wait: 1000
+    rabbitmq:
+            host: www.janker.xyz
+            port: 5672
+            username: janker
+            password: 951207

@@ -1,0 +1,69 @@
+# 默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：  
+# 测试环境：java -jar springboot.jar --spring.profiles.active=test  
+# 生产环境：java -jar springboot.jar --spring.profiles.active=prod
+
+# Tomcat
+server:
+    tomcat:
+        #配置Tomcat编码，默认为UTF-8
+        uri-encoding: UTF-8
+        #tomcat最大线程数，默认为200
+        max-threads: 200
+        min-spare-threads: 30
+        #Tomcat是否开启压缩，默认为关闭
+        compression: on
+    #session最大超时时间(分钟)，默认为30
+    session-timeout: 60
+    # 该服务绑定IP地址，启动服务器时如本机不是该IP地址则抛出异常启动失败，只有特殊需求的情况下才配置
+    # server.address: 192.168.16.11
+    port: 8080
+    #打开注释，则通过【http://localhost:8080/springboot】访问
+    #context-path: /springboot
+
+spring: 
+    # 配置 Spring Session 使用 Redis 来进行统一管理
+    session: 
+        store-type: redis
+    # 环境 dev:开发环境|test:测试环境|prod:生成环境
+    profiles:
+        active: dev
+    # jackson时间格式化
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
+    # http设置
+    http:
+        # 编码设置
+        encoding: 
+            charset: UTF-8
+            enabled: true
+            force: true
+        #文件上传配置
+        multipart:
+            maxFileSize: 100MB
+            maxRequestSize: 100MB
+            enabled: true
+    # thymeleaf 模板引擎
+    thymeleaf:
+        cache: false
+        prefix: classpath:/templates/
+        suffix: .html
+        mode: LEGACYHTML5
+        encoding: UTF-8
+        content-type: text/html
+        check-template: true
+        check-template-location: true
+    
+# mybatis配置
+mybatis: 
+    typeAliasesPackage: org.jeese.modules.*.entity
+    mapperLocations: classpath:mybatis/mapper/*.xml
+    configLocation: classpath:mybatis/mybatis-config.xml
+    
+#pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
